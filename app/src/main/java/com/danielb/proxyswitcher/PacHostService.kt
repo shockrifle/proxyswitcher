@@ -15,15 +15,15 @@ import java.io.IOException
 class PacHostService : Service() {
     companion object {
         var isOn: Boolean = false
-        val TAG = PacHostService::class.java.simpleName
+        val TAG: String = PacHostService::class.java.simpleName
         const val CHANNEL_ID_FOREGROUND = "com.danielb.proxyswitcher.notification.CHANNEL_ID_FOREGROUND"
+        const val EXTRA_STOP_SERVER = "com.danielb.proxyswitcher.notification.STOP_SERVER"
     }
 
     private var nano: NanoServer? = null
     private var lastShownNotificationId = 0
 
     override fun onCreate() {
-        Log.e(TAG, "service started")
         super.onCreate()
 
         isOn = true
@@ -33,7 +33,10 @@ class PacHostService : Service() {
         start()
     }
 
-    override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
+    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        if (intent?.getBooleanExtra(EXTRA_STOP_SERVER, false) == true) {
+            stopSelf()
+        }
         return Service.START_STICKY
     }
 
@@ -44,7 +47,6 @@ class PacHostService : Service() {
 
     override fun onDestroy() {
         super.onDestroy()
-
         nano?.stop()
         stopAsForeground()
         isOn = false
@@ -53,29 +55,28 @@ class PacHostService : Service() {
     private fun start() {
         try {
             nano?.start()
+            createAndShowForegroundNotification(this, 1)
         } catch (e: IOException) {
-            e.printStackTrace()
+            Log.e(TAG, "Cannot start server", e)
+            stopSelf()
         }
-
-        createAndShowForegroundNotification(this, 1)
     }
 
-    fun stopAsForeground() {
+    private fun stopAsForeground() {
         stopForeground(true)
     }
 
     private fun createAndShowForegroundNotification(service: Service, notificationId: Int) {
 
-        val notificationIntent = Intent(this, MainActivity::class.java)
-        val pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0)
-
         val builder = getNotificationBuilder(service, CHANNEL_ID_FOREGROUND, NotificationManagerCompat.IMPORTANCE_LOW)
         builder.setOngoing(true)
-                .setContentIntent(pendingIntent)
+                .setContentIntent(PendingIntent.getActivity(this, 0, Intent(this, MainActivity::class.java), 0))
                 .setSmallIcon(R.drawable.ic_notification)
                 .setContentText("localhost:8080")
                 .setContentTitle("Server running...")
                 .setTicker("Server running...")
+                .addAction(R.drawable.ic_stop_black_24dp, "Stop server",
+                        PendingIntent.getService(this, 0, Intent(this, PacHostService::class.java).putExtra(EXTRA_STOP_SERVER, true), 0))
 
         val notification = builder.build()
 
