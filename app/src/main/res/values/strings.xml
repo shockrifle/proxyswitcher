@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Proxy Switcher</string>
+    <string name="notifications_channel_description">Notification channel for proxy server</string>
 </resources>
