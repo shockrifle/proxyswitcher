@@ -1,11 +1,11 @@
 package com.danielb.proxyswitcher
 
-import android.annotation.TargetApi
 import android.app.*
 import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.IBinder
+import android.support.annotation.RequiresApi
 import android.support.v4.app.NotificationCompat
 import android.support.v4.app.NotificationManagerCompat
 import android.util.Log
@@ -68,8 +68,8 @@ class PacHostService : Service() {
 
     private fun createAndShowForegroundNotification(service: Service, notificationId: Int) {
 
-        val builder = getNotificationBuilder(service, CHANNEL_ID_FOREGROUND, NotificationManagerCompat.IMPORTANCE_LOW)
-        builder.setOngoing(true)
+        val notification = getNotificationBuilder(service, CHANNEL_ID_FOREGROUND, NotificationManagerCompat.IMPORTANCE_LOW)
+                .setOngoing(true)
                 .setContentIntent(PendingIntent.getActivity(this, 0, Intent(this, MainActivity::class.java), 0))
                 .setSmallIcon(R.drawable.ic_notification)
                 .setContentText("localhost:8080")
@@ -77,8 +77,7 @@ class PacHostService : Service() {
                 .setTicker("Server running...")
                 .addAction(R.drawable.ic_stop_black_24dp, "Stop server",
                         PendingIntent.getService(this, 0, Intent(this, PacHostService::class.java).putExtra(EXTRA_STOP_SERVER, true), 0))
-
-        val notification = builder.build()
+                .build()
 
         service.startForeground(notificationId, notification)
 
@@ -90,15 +89,13 @@ class PacHostService : Service() {
     }
 
     private fun getNotificationBuilder(context: Context, channelId: String, importance: Int): NotificationCompat.Builder {
-        val builder: NotificationCompat.Builder
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             prepareChannel(context, channelId, importance)
         }
-        builder = NotificationCompat.Builder(context, channelId)
-        return builder
+        return NotificationCompat.Builder(context, channelId)
     }
 
-    @TargetApi(26)
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun prepareChannel(context: Context, id: String, importance: Int) {
         val appName = context.getString(R.string.app_name)
         val description = context.getString(R.string.notifications_channel_description)
