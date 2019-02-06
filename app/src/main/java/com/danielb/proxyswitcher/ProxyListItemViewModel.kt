@@ -20,7 +20,7 @@ class ProxyListItemViewModel(private val presenter: ProxyListPresenter) : BaseOb
     }
 
     fun onClick() {
-        presenter.toProxyDetail()
+        presenter.toProxyDetail(data.id)
     }
 
     fun onSelected(view: View) {

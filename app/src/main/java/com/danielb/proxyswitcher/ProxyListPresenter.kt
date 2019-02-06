@@ -10,7 +10,7 @@ class ProxyListPresenter(private val navigator: Navigator) {
         responseCallback?.onResponse(proxies)
     }
 
-    fun toProxyDetail() = navigator.toProxyDetail()
+    fun toProxyDetail(id: Int = -1) = navigator.toProxyDetail(id)
 
     fun onProxyChecked(id: Int, checked: Boolean) {
         proxies.forEach { it.selected = it.id == id && checked }

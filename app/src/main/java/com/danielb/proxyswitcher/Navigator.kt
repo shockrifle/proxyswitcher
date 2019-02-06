@@ -1,14 +1,26 @@
 package com.danielb.proxyswitcher
 
-import android.content.Context
+import android.support.v4.app.Fragment
 import java.lang.ref.WeakReference
 
-class Navigator(context: Context) {
+class Navigator(activity: MainActivity?) {
 
-    val context: WeakReference<Context> = WeakReference(context)
+    val activity: WeakReference<MainActivity?> = WeakReference(activity)
 
-    fun toProxyDetail() {
+    fun toProxyDetail(id: Int = -1) {
 
+    }
+
+    fun toProxyList() {
+        replaceFragment(ProxyListFragment.newInstance())
+    }
+
+    private fun replaceFragment(fragment: Fragment) {
+        activity.get()?.run {
+            supportFragmentManager.beginTransaction()
+                    .add(R.id.container, fragment)
+                    .commit()
+        }
     }
 
 }
