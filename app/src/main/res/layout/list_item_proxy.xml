@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.danielb.proxyswitcher.ProxyListItemViewModel"/>
+    </data>
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="@{() -> viewModel.onClick()}"
+        android:background="?android:attr/selectableItemBackground"
+        android:paddingEnd="@dimen/list_item_horizontal_padding"
+        android:paddingStart="@dimen/list_item_horizontal_padding">
+
+        <TextView
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/list_item_vertical_margin"
+            android:layout_marginTop="8dp"
+            android:text="@{viewModel.name}"
+            android:textSize="@dimen/list_item_text_size"/>
+
+        <CheckBox
+            android:id="@+id/check_box"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="@{viewModel.selected}"
+            android:onClick="@{(view) -> viewModel.onSelected(view)}"/>
+
+        <View
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@color/divider"/>
+    </android.support.constraint.ConstraintLayout>
+</layout>
