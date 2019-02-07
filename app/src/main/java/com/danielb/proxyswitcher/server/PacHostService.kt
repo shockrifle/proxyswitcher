@@ -9,6 +9,7 @@ import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.lifecycle.MutableLiveData
 import com.danielb.proxyswitcher.MainActivity
 import com.danielb.proxyswitcher.R
 import java.io.IOException
@@ -16,7 +17,7 @@ import java.io.IOException
 
 class PacHostService : Service() {
     companion object {
-        var isOn: Boolean = false
+        var isOn: MutableLiveData<Boolean> = MutableLiveData(false)
         val TAG: String = PacHostService::class.java.simpleName
         const val CHANNEL_ID_FOREGROUND = "com.danielb.proxyswitcher.notification.CHANNEL_ID_FOREGROUND"
         const val EXTRA_STOP_SERVER = "com.danielb.proxyswitcher.notification.STOP_SERVER"
@@ -28,7 +29,7 @@ class PacHostService : Service() {
     override fun onCreate() {
         super.onCreate()
 
-        isOn = true
+        isOn.value = true
 
         nano = NanoServer()
 
@@ -51,7 +52,7 @@ class PacHostService : Service() {
         super.onDestroy()
         nano?.stop()
         stopAsForeground()
-        isOn = false
+        isOn.value = false
     }
 
     private fun start() {

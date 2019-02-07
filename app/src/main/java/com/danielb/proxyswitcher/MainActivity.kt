@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import com.danielb.proxyswitcher.databinding.ActivityMainBinding
 import com.danielb.proxyswitcher.server.PacHostService
 
@@ -29,21 +30,24 @@ class MainActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         super.onCreateOptionsMenu(menu)
         menuInflater.inflate(R.menu.main_menu, menu)
-        if (PacHostService.isOn) {
-            menu?.findItem(R.id.start_stop_server)?.icon = getDrawable(R.drawable.ic_stop_white_24dp)
-        }
+        PacHostService.isOn.observe(this, Observer {
+            menu?.findItem(R.id.start_stop_server)?.icon = getDrawable(
+                    if (it)
+                        R.drawable.ic_stop_white_24dp
+                    else
+                        R.drawable.ic_play_arrow_white_24dp
+            )
+        })
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem?) =
             when (item?.itemId) {
                 R.id.start_stop_server -> {
-                    if (!PacHostService.isOn) {
+                    if (PacHostService.isOn.value == false) {
                         navigator.startServer()
-                        item.icon = getDrawable(R.drawable.ic_stop_white_24dp)
                     } else {
                         navigator.stopServer()
-                        item.icon = getDrawable(R.drawable.ic_play_arrow_white_24dp)
                     }
                     true
                 }
