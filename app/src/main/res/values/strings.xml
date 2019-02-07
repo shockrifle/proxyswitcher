@@ -18,5 +18,6 @@
 
     <string name="save_success">Proxy saved</string>
     <string name="delete_success">Proxy deleted</string>
+    <string name="menu_start_server">Start server</string>
 
 </resources>

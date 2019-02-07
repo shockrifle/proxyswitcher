@@ -1,11 +1,15 @@
 package com.danielb.proxyswitcher
 
+import android.app.PendingIntent
+import android.content.Intent
+import android.os.Build
 import android.support.annotation.StringRes
 import android.support.v4.app.Fragment
 import android.widget.Toast
 import com.danielb.proxyswitcher.model.DEFAULT_PROXY_ID
 import com.danielb.proxyswitcher.proxydetail.ProxyDetailFragment
 import com.danielb.proxyswitcher.proxylist.ProxyListFragment
+import com.danielb.proxyswitcher.server.PacHostService
 import java.lang.ref.WeakReference
 
 class Navigator(activity: MainActivity?) {
@@ -43,6 +47,23 @@ class Navigator(activity: MainActivity?) {
 
     fun back() {
         activity.get()?.onBackPressed()
+    }
+
+    fun startServer() {
+        activity.get()?.run {
+            val intent = Intent(this, PacHostService::class.java)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                startForegroundService(intent)
+            } else {
+                startService(intent)
+            }
+        }
+    }
+
+    fun stopServer() {
+        activity.get()?.run {
+            PendingIntent.getService(this, 0, Intent(this, PacHostService::class.java).putExtra(PacHostService.EXTRA_STOP_SERVER, true), 0)
+        }
     }
 
 }
