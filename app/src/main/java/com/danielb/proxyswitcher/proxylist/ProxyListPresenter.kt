@@ -1,4 +1,8 @@
-package com.danielb.proxyswitcher
+package com.danielb.proxyswitcher.proxylist
+
+import com.danielb.proxyswitcher.DEFAULT_ID
+import com.danielb.proxyswitcher.Navigator
+import com.danielb.proxyswitcher.Proxy
 
 class ProxyListPresenter(private val navigator: Navigator) {
 
@@ -10,15 +14,15 @@ class ProxyListPresenter(private val navigator: Navigator) {
         responseCallback?.onResponse(proxies)
     }
 
-    fun toProxyDetail(id: Int = -1) = navigator.toProxyDetail(id)
+    fun toProxyDetail(id: Int = DEFAULT_ID) = navigator.toProxyDetail(id)
 
     fun onProxyChecked(id: Int, checked: Boolean) {
         proxies.forEach { it.selected = it.id == id && checked }
         getProxies()
     }
 
-}
+    interface ResponseCallback {
+        fun onResponse(response: List<Proxy>)
+    }
 
-interface ResponseCallback {
-    fun onResponse(response: List<Proxy>)
 }

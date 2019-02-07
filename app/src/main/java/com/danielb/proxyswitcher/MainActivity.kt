@@ -30,6 +30,12 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
+    override fun onBackPressed() {
+        if ((navigator.topFragment as? BackListener)?.onBackPressed() != true) {
+            super.onBackPressed()
+        }
+    }
+
     //Start service:
 //    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 //        startForegroundService(Intent(this, PacHostService::class.java))

@@ -1,4 +1,4 @@
-package com.danielb.proxyswitcher
+package com.danielb.proxyswitcher.server
 
 import fi.iki.elonen.NanoHTTPD
 import java.io.IOException

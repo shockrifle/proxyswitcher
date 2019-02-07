@@ -4,15 +4,15 @@
     <data>
         <variable
             name="viewModel"
-            type="com.danielb.proxyswitcher.ProxyListItemViewModel"/>
+            type="com.danielb.proxyswitcher.proxylist.ProxyListItemViewModel"/>
     </data>
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="@{() -> viewModel.onClick()}"
         android:background="?android:attr/selectableItemBackground"
-        android:paddingEnd="@dimen/list_item_horizontal_padding"
-        android:paddingStart="@dimen/list_item_horizontal_padding">
+        android:paddingEnd="@dimen/default_horizontal_padding"
+        android:paddingStart="@dimen/default_horizontal_padding">
 
         <TextView
             app:layout_constraintBottom_toBottomOf="parent"
@@ -21,7 +21,7 @@
             app:layout_constraintTop_toTopOf="parent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/list_item_vertical_margin"
+            android:layout_marginBottom="@dimen/default_vertical_padding"
             android:layout_marginTop="8dp"
             android:text="@{viewModel.name}"
             android:textSize="@dimen/list_item_text_size"/>

@@ -1,13 +1,17 @@
-package com.danielb.proxyswitcher
+package com.danielb.proxyswitcher.proxylist
 
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.*
+import com.danielb.proxyswitcher.MainActivity
+import com.danielb.proxyswitcher.Navigator
+import com.danielb.proxyswitcher.Proxy
+import com.danielb.proxyswitcher.R
 import com.danielb.proxyswitcher.databinding.FragmentProxyListBinding
 
-class ProxyListFragment : Fragment(), ResponseCallback {
+class ProxyListFragment : Fragment(), ProxyListPresenter.ResponseCallback {
 
     private lateinit var binding: FragmentProxyListBinding
     private lateinit var navigator: Navigator
@@ -37,7 +41,6 @@ class ProxyListFragment : Fragment(), ResponseCallback {
 
         binding.proxyList.layoutManager = LinearLayoutManager(activity)
         binding.proxyList.adapter = ProxyListAdapter(presenter)
-        presenter.responseCallback = this
 
         return binding.root
     }
@@ -45,14 +48,18 @@ class ProxyListFragment : Fragment(), ResponseCallback {
 
     override fun onStart() {
         super.onStart()
+        presenter.responseCallback = this
         presenter.getProxies()
     }
 
+    override fun onStop() {
+        presenter.responseCallback = null
+        super.onStop()
+    }
 
     override fun onResponse(response: List<Proxy>) {
         (binding.proxyList.adapter as? ProxyListAdapter)?.data = response
     }
-
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         inflater?.inflate(R.menu.proxy_list_menu, menu)

@@ -1,6 +1,18 @@
 <resources>
+
     <string name="app_name">Proxy Switcher</string>
+
     <string name="notifications_channel_description">Notification channel for proxy server</string>
+
     <string name="title_proxies">Proxies</string>
+    <string name="title_proxy_details">Proxy details</string>
+
     <string name="menu_add_proxy">Add proxy</string>
+    <string name="menu_save">Save</string>
+
+    <string name="proxy_detail_hint_name">Name</string>
+    <string name="proxy_detail_hint_host">Host</string>
+    <string name="proxy_detail_hint_description">Description</string>
+    <string name="proxy_detail_label_id">ID:&#160;</string>
+
 </resources>
