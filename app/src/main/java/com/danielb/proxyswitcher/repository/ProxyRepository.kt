@@ -20,4 +20,8 @@ object ProxyRepository {
         }
     }
 
+    fun deleteById(id: Int) {
+        proxies.remove(id)
+    }
+
 }

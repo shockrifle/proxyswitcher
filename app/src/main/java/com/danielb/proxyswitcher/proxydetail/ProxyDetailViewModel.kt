@@ -35,4 +35,8 @@ class ProxyDetailViewModel(private val presenter: ProxyDetailPresenter) : BaseOb
     fun save() {
         presenter.save(data)
     }
+
+    fun delete() {
+        presenter.delete(data.id)
+    }
 }

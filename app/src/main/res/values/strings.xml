@@ -9,10 +9,14 @@
 
     <string name="menu_add_proxy">Add proxy</string>
     <string name="menu_save">Save</string>
+    <string name="menu_delete">Delete</string>
 
     <string name="proxy_detail_hint_name">Name</string>
     <string name="proxy_detail_hint_host">Host</string>
     <string name="proxy_detail_hint_description">Description</string>
     <string name="proxy_detail_label_id">ID:&#160;</string>
+
+    <string name="save_success">Proxy saved</string>
+    <string name="delete_success">Proxy deleted</string>
 
 </resources>

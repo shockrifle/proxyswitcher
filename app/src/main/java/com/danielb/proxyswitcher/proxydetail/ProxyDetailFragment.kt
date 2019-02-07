@@ -81,6 +81,10 @@ class ProxyDetailFragment : Fragment(), ProxyDetailPresenter.ResponseCallback, B
                     binding.viewModel?.save()
                     true
                 }
+                R.id.delete_proxy -> {
+                    binding.viewModel?.delete()
+                    true
+                }
                 else -> super.onOptionsItemSelected(item)
             }
 
