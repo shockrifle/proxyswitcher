@@ -1,6 +1,7 @@
 package com.danielb.proxyswitcher
 
 import android.support.v4.app.Fragment
+import com.danielb.proxyswitcher.model.DEFAULT_ID
 import com.danielb.proxyswitcher.proxydetail.ProxyDetailFragment
 import com.danielb.proxyswitcher.proxylist.ProxyListFragment
 import java.lang.ref.WeakReference

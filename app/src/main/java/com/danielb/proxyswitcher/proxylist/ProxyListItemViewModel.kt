@@ -3,7 +3,7 @@ package com.danielb.proxyswitcher.proxylist
 import android.databinding.BaseObservable
 import android.view.View
 import android.widget.CheckBox
-import com.danielb.proxyswitcher.Proxy
+import com.danielb.proxyswitcher.model.Proxy
 
 class ProxyListItemViewModel(private val presenter: ProxyListPresenter) : BaseObservable() {
 

@@ -1,16 +1,18 @@
 package com.danielb.proxyswitcher.proxylist
 
-import com.danielb.proxyswitcher.DEFAULT_ID
 import com.danielb.proxyswitcher.Navigator
-import com.danielb.proxyswitcher.Proxy
+import com.danielb.proxyswitcher.model.DEFAULT_ID
+import com.danielb.proxyswitcher.model.Proxy
+import com.danielb.proxyswitcher.repository.ProxyRepository
 
 class ProxyListPresenter(private val navigator: Navigator) {
 
+    private var proxies: List<Proxy> = listOf()
+
     var responseCallback: ResponseCallback? = null
 
-    private val proxies = listOf(Proxy(0, "asd"), Proxy(1, "ccc"), Proxy(2, "vvv"))
-
     fun getProxies() {
+        proxies = ProxyRepository.getProxies()
         responseCallback?.onResponse(proxies)
     }
 

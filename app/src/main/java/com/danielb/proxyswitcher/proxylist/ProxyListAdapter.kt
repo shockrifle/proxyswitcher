@@ -3,8 +3,8 @@ package com.danielb.proxyswitcher.proxylist
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.danielb.proxyswitcher.Proxy
 import com.danielb.proxyswitcher.databinding.ListItemProxyBinding
+import com.danielb.proxyswitcher.model.Proxy
 
 class ProxyListAdapter(private val presenter: ProxyListPresenter, data: List<Proxy> = emptyList()) : RecyclerView.Adapter<ProxyListItemViewHolder>() {
 

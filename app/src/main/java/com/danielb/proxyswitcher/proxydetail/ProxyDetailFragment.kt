@@ -4,8 +4,13 @@ import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.*
-import com.danielb.proxyswitcher.*
+import com.danielb.proxyswitcher.BackListener
+import com.danielb.proxyswitcher.MainActivity
+import com.danielb.proxyswitcher.Navigator
+import com.danielb.proxyswitcher.R
 import com.danielb.proxyswitcher.databinding.FragmentProxyDetailBinding
+import com.danielb.proxyswitcher.model.DEFAULT_ID
+import com.danielb.proxyswitcher.model.Proxy
 
 class ProxyDetailFragment : Fragment(), ProxyDetailPresenter.ResponseCallback, BackListener {
 
@@ -70,9 +75,14 @@ class ProxyDetailFragment : Fragment(), ProxyDetailPresenter.ResponseCallback, B
         super.onCreateOptionsMenu(menu, inflater)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        return super.onOptionsItemSelected(item)
-    }
+    override fun onOptionsItemSelected(item: MenuItem?) =
+            when (item?.itemId) {
+                R.id.save_proxy -> {
+                    binding.viewModel?.save()
+                    true
+                }
+                else -> super.onOptionsItemSelected(item)
+            }
 
     override fun onBackPressed(): Boolean {
         //TODO: show discard dialog

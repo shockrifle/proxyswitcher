@@ -7,9 +7,9 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.*
 import com.danielb.proxyswitcher.MainActivity
 import com.danielb.proxyswitcher.Navigator
-import com.danielb.proxyswitcher.Proxy
 import com.danielb.proxyswitcher.R
 import com.danielb.proxyswitcher.databinding.FragmentProxyListBinding
+import com.danielb.proxyswitcher.model.Proxy
 
 class ProxyListFragment : Fragment(), ProxyListPresenter.ResponseCallback {
 

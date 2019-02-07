@@ -1,7 +1,7 @@
 package com.danielb.proxyswitcher.proxydetail
 
 import android.databinding.BaseObservable
-import com.danielb.proxyswitcher.Proxy
+import com.danielb.proxyswitcher.model.Proxy
 import com.danielb.proxyswitcher.util.VisibilityDelegate
 
 class ProxyDetailViewModel(private val presenter: ProxyDetailPresenter) : BaseObservable() {
@@ -10,16 +10,29 @@ class ProxyDetailViewModel(private val presenter: ProxyDetailPresenter) : BaseOb
 
     val id
         get() = data.id.toString()
-    val name
+    var name
+        set(value) {
+            data.name = value
+        }
         get() = data.name
-    val host
+    var host
+        set(value) {
+            data.host = value
+        }
         get() = data.host
-    val description
+    var description
+        set(value) {
+            data.description = value
+        }
         get() = data.description
     val idVisibility by VisibilityDelegate { data.id > -1 }
 
     fun update(proxy: Proxy) {
         data = proxy
         notifyChange()
+    }
+
+    fun save() {
+        presenter.save(data)
     }
 }
