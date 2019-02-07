@@ -1,6 +1,5 @@
 package com.danielb.proxyswitcher
 
-import android.app.PendingIntent
 import android.content.Intent
 import android.os.Build
 import android.widget.Toast
@@ -61,7 +60,13 @@ class Navigator(activity: MainActivity?) {
 
     fun stopServer() {
         activity.get()?.run {
-            PendingIntent.getService(this, 0, Intent(this, PacHostService::class.java).putExtra(PacHostService.EXTRA_STOP_SERVER, true), 0)
+            val intent = Intent(this, PacHostService::class.java)
+                    .putExtra(PacHostService.EXTRA_STOP_SERVER, true)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                startForegroundService(intent)
+            } else {
+                startService(intent)
+            }
         }
     }
 
