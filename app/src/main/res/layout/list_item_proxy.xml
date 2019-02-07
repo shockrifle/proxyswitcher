@@ -6,7 +6,7 @@
             name="viewModel"
             type="com.danielb.proxyswitcher.proxylist.ProxyListItemViewModel"/>
     </data>
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="@{() -> viewModel.onClick()}"
@@ -43,5 +43,5 @@
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:background="@color/divider"/>
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -1,12 +1,11 @@
 package com.danielb.proxyswitcher.proxylist
 
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.danielb.proxyswitcher.databinding.ListItemProxyBinding
 import com.danielb.proxyswitcher.model.Proxy
 
-class ProxyListAdapter(private val presenter: ProxyListPresenter, data: List<Proxy> = emptyList()) : RecyclerView.Adapter<ProxyListItemViewHolder>() {
+class ProxyListAdapter(private val presenter: ProxyListPresenter, data: List<Proxy> = emptyList()) : androidx.recyclerview.widget.RecyclerView.Adapter<ProxyListItemViewHolder>() {
 
     var data = data
         set(value) {
@@ -26,7 +25,7 @@ class ProxyListAdapter(private val presenter: ProxyListPresenter, data: List<Pro
 
 }
 
-class ProxyListItemViewHolder(private val binding: ListItemProxyBinding) : RecyclerView.ViewHolder(binding.root) {
+class ProxyListItemViewHolder(private val binding: ListItemProxyBinding) : androidx.recyclerview.widget.RecyclerView.ViewHolder(binding.root) {
     fun bind(proxy: Proxy) {
         binding.viewModel?.update(proxy)
     }

@@ -2,7 +2,6 @@ package com.danielb.proxyswitcher.proxydetail
 
 import android.content.Context
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.view.*
 import com.danielb.proxyswitcher.BackListener
 import com.danielb.proxyswitcher.MainActivity
@@ -12,7 +11,7 @@ import com.danielb.proxyswitcher.databinding.FragmentProxyDetailBinding
 import com.danielb.proxyswitcher.model.DEFAULT_PROXY_ID
 import com.danielb.proxyswitcher.model.Proxy
 
-class ProxyDetailFragment : Fragment(), ProxyDetailPresenter.ResponseCallback, BackListener {
+class ProxyDetailFragment : androidx.fragment.app.Fragment(), ProxyDetailPresenter.ResponseCallback, BackListener {
 
     private lateinit var binding: FragmentProxyDetailBinding
     private lateinit var navigator: Navigator

@@ -2,8 +2,6 @@ package com.danielb.proxyswitcher.proxylist
 
 import android.content.Context
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
 import android.view.*
 import com.danielb.proxyswitcher.MainActivity
 import com.danielb.proxyswitcher.Navigator
@@ -11,7 +9,7 @@ import com.danielb.proxyswitcher.R
 import com.danielb.proxyswitcher.databinding.FragmentProxyListBinding
 import com.danielb.proxyswitcher.model.Proxy
 
-class ProxyListFragment : Fragment(), ProxyListPresenter.ResponseCallback {
+class ProxyListFragment : androidx.fragment.app.Fragment(), ProxyListPresenter.ResponseCallback {
 
     private lateinit var binding: FragmentProxyListBinding
     private lateinit var navigator: Navigator
@@ -39,7 +37,7 @@ class ProxyListFragment : Fragment(), ProxyListPresenter.ResponseCallback {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentProxyListBinding.inflate(inflater, container, false)
 
-        binding.proxyList.layoutManager = LinearLayoutManager(activity)
+        binding.proxyList.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(activity)
         binding.proxyList.adapter = ProxyListAdapter(presenter)
 
         return binding.root

@@ -1,6 +1,6 @@
 package com.danielb.proxyswitcher.proxydetail
 
-import android.databinding.BaseObservable
+import androidx.databinding.BaseObservable
 import com.danielb.proxyswitcher.model.Proxy
 import com.danielb.proxyswitcher.util.VisibilityDelegate
 

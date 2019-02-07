@@ -3,9 +3,8 @@ package com.danielb.proxyswitcher
 import android.app.PendingIntent
 import android.content.Intent
 import android.os.Build
-import android.support.annotation.StringRes
-import android.support.v4.app.Fragment
 import android.widget.Toast
+import androidx.annotation.StringRes
 import com.danielb.proxyswitcher.model.DEFAULT_PROXY_ID
 import com.danielb.proxyswitcher.proxydetail.ProxyDetailFragment
 import com.danielb.proxyswitcher.proxylist.ProxyListFragment
@@ -16,7 +15,7 @@ class Navigator(activity: MainActivity?) {
 
     private val activity: WeakReference<MainActivity?> = WeakReference(activity)
 
-    val topFragment: Fragment?
+    val topFragment: androidx.fragment.app.Fragment?
         get() = activity.get()?.supportFragmentManager?.findFragmentById(R.id.container)
 
     fun toProxyDetail(id: Int = DEFAULT_PROXY_ID) {
@@ -27,7 +26,7 @@ class Navigator(activity: MainActivity?) {
         replaceFragment(ProxyListFragment.newInstance())
     }
 
-    private fun replaceFragment(fragment: Fragment) {
+    private fun replaceFragment(fragment: androidx.fragment.app.Fragment) {
         activity.get()?.run {
             val transaction = supportFragmentManager.beginTransaction()
             if (supportFragmentManager.fragments.size > 0) {
