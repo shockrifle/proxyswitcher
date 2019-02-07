@@ -9,7 +9,7 @@ import com.danielb.proxyswitcher.MainActivity
 import com.danielb.proxyswitcher.Navigator
 import com.danielb.proxyswitcher.R
 import com.danielb.proxyswitcher.databinding.FragmentProxyDetailBinding
-import com.danielb.proxyswitcher.model.DEFAULT_ID
+import com.danielb.proxyswitcher.model.DEFAULT_PROXY_ID
 import com.danielb.proxyswitcher.model.Proxy
 
 class ProxyDetailFragment : Fragment(), ProxyDetailPresenter.ResponseCallback, BackListener {
@@ -93,6 +93,6 @@ class ProxyDetailFragment : Fragment(), ProxyDetailPresenter.ResponseCallback, B
         return false
     }
 
-    fun getProxyId() = arguments?.getInt(EXTRA_PROXY_ID, DEFAULT_ID) ?: DEFAULT_ID
+    fun getProxyId() = arguments?.getInt(EXTRA_PROXY_ID, DEFAULT_PROXY_ID) ?: DEFAULT_PROXY_ID
 
 }
